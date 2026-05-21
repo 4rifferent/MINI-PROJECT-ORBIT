@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CleanClass — Admin Dashboard</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">CleanClass <span>Admin</span></div>
+    <nav class="sidebar-nav">
+      <a href="#" data-page="dashboard" class="active"><span class="icon">📊</span><span>Dashboard</span></a>
+      <a href="#" data-page="students"><span class="icon">👥</span><span>Data Siswa</span></a>
+      <a href="#" data-page="schedule"><span class="icon">📅</span><span>Jadwal Piket</span></a>
+      <a href="#" data-page="reports"><span class="icon">📋</span><span>Laporan</span><span class="badge pending" id="reportBadge">0</span></a>
+      <a href="#" data-page="leaderboard"><span class="icon">🏆</span><span>Leaderboard</span></a>
+      <a href="#" data-page="rewards"><span class="icon">🎁</span><span>Rewards</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" data-page="main"><span class="icon">←</span><span>Kembali ke Main</span></a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <h1 id="pageTitle">Dashboard <small>Overview sistem CleanClass</small></h1>
+      </div>
+      <div class="topbar-right">
+        <span class="admin-badge">🔑 Admin</span>
+        <button id="themeToggle">🌙</button>
+      </div>
+    </div>
+
+    <!-- PAGE: DASHBOARD -->
+    <div class="page active" id="page-dashboard">
+      <div class="stats-grid">
+        <div class="stat-card"><div class="s-top"><span class="s-icon">👥</span></div><div class="s-number" id="dashStudents">0</div><div class="s-label">Total Siswa</div></div>
+        <div class="stat-card"><div class="s-top"><span class="s-icon">📋</span></div><div class="s-number" id="dashReports">0</div><div class="s-label">Laporan Masuk</div><div class="s-change up" id="dashReportsChange">+2 hari ini</div></div>
+        <div class="stat-card"><div class="s-top"><span class="s-icon">⭐</span></div><div class="s-number" id="dashPoints">0</div><div class="s-label">Total Poin Beredar</div></div>
+        <div class="stat-card"><div class="s-top"><span class="s-icon">🎁</span></div><div class="s-number" id="dashRedeem">0</div><div class="s-label">Penukaran</div></div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="s-label">Siswa Aktif</div><div class="s-number" id="dashStudents2">0</div></div>
+        <div class="stat-card"><div class="s-label">Laporan Hari Ini</div><div class="s-number" id="dashReports2">0</div></div>
+        <div class="stat-card"><div class="s-label">Total Poin</div><div class="s-number" id="dashPoints2">0</div></div>
+        <div class="stat-card"><div class="s-label">Reward Diklaim</div><div class="s-number" id="dashRedeem2">0</div></div>
+      </div>
+      <div class="card">
+        <div class="card-title">📌 Informasi</div>
+        <p style="color:var(--text-light);font-size:14px">Selamat datang di panel admin CleanClass. Gunakan sidebar untuk mengelola data siswa, jadwal piket, laporan area kotor, leaderboard, dan rewards sistem.</p>
+      </div>
+    </div>
+
+    <!-- PAGE: STUDENTS -->
+    <div class="page" id="page-students">
+      <div class="card">
+        <div class="card-title">👥 Manajemen Siswa</div>
+        <div class="toolbar">
+          <button class="btn-primary" id="addStudentBtn">+ Tambah Siswa</button>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead><tr><th>#</th><th>Nama</th><th>Kelas</th><th>Poin</th><th>Status</th><th>Aksi</th></tr></thead>
+            <tbody id="studentsBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE: SCHEDULE -->
+    <div class="page" id="page-schedule">
+      <div class="card">
+        <div class="card-title">📅 Jadwal Piket Mingguan</div>
+        <p style="color:var(--text-light);font-size:14px;margin-bottom:16px">Klik icon pensil untuk mengedit jadwal setiap hari.</p>
+        <div class="table-container">
+          <table>
+            <thead><tr><th>Hari</th><th>Petugas Piket</th><th>Aksi</th></tr></thead>
+            <tbody id="scheduleBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE: REPORTS -->
+    <div class="page" id="page-reports">
+      <div class="card">
+        <div class="card-title">📋 Laporan Area Kotor</div>
+        <p style="color:var(--text-light);font-size:14px;margin-bottom:16px">Verifikasi laporan dari siswa. Setujui ✅ atau tolak ❌.</p>
+        <div class="table-container">
+          <table>
+            <thead><tr><th>#</th><th>Pelapor</th><th>Area</th><th>Deskripsi</th><th>Status</th><th>Aksi</th></tr></thead>
+            <tbody id="reportsBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE: LEADERBOARD -->
+    <div class="page" id="page-leaderboard">
+      <div class="card">
+        <div class="card-title">🏆 Leaderboard</div>
+        <div class="toolbar">
+          <button class="btn-primary" id="addLBbtn">+ Tambah</button>
+          <button class="btn-danger" id="resetLBbtn">Reset</button>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead><tr><th>Rank</th><th>Nama</th><th>Poin</th><th>Aksi</th></tr></thead>
+            <tbody id="adminLBBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE: REWARDS -->
+    <div class="page" id="page-rewards">
+      <div class="card">
+        <div class="card-title">🎁 Manajemen Reward</div>
+        <div class="toolbar">
+          <button class="btn-primary" id="addRewardBtn">+ Tambah Reward</button>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead><tr><th>Icon</th><th>Nama</th><th>Deskripsi</th><th>Biaya</th><th>Aksi</th></tr></thead>
+            <tbody id="rewardBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- MODAL STUDENT -->
+  <div class="modal-overlay" id="studentModal">
+    <div class="modal">
+      <h3 id="studentModalTitle">Tambah Siswa</h3>
+      <form id="studentForm">
+        <div class="form-group"><label>Nama Lengkap</label><input type="text" id="sName" required></div>
+        <div class="form-group"><label>Kelas</label><input type="text" id="sClass" placeholder="XII IPA 1" required></div>
+        <div class="form-group"><label>Poin</label><input type="number" id="sPoints" min="0" value="0"></div>
+        <div class="form-group"><label>Status</label>
+          <select id="sStatus">
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" onclick="closeModal('studentModal')">Batal</button>
+          <button type="submit" class="btn-primary">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

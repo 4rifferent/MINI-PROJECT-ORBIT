@@ -3,567 +3,295 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>CleanClass</title>
-
-  <style>
-
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:Arial, sans-serif;
-    }
-
-    body{
-      background:#f4f9ff;
-      color:#222;
-    }
-
-    /* NAVBAR */
-
-    header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:20px 60px;
-      background:white;
-      box-shadow:0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    .logo{
-      font-size:30px;
-      font-weight:bold;
-      color:#0077ff;
-    }
-
-    nav a{
-      text-decoration:none;
-      color:#333;
-      margin-left:20px;
-      font-weight:bold;
-    }
-
-    nav a:hover{
-      color:#0077ff;
-    }
-
-    /* HERO */
-
-    .hero{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:80px 60px;
-      gap:40px;
-    }
-
-    .hero-text{
-      width:50%;
-    }
-
-    .hero-text h1{
-      font-size:55px;
-      color:#0077ff;
-      margin-bottom:20px;
-    }
-
-    .hero-text p{
-      line-height:1.8;
-      font-size:18px;
-      margin-bottom:30px;
-    }
-
-    .hero-text button{
-      padding:15px 30px;
-      border:none;
-      background:#0077ff;
-      color:white;
-      border-radius:10px;
-      cursor:pointer;
-      font-size:16px;
-    }
-
-    .hero-text button:hover{
-      background:#005fd1;
-    }
-
-    .hero-image img{
-      width:320px;
-    }
-
-    /* SECTION */
-
-    section{
-      padding:60px;
-    }
-
-    section h2{
-      text-align:center;
-      color:#0077ff;
-      margin-bottom:35px;
-      font-size:38px;
-    }
-
-    /* FEATURES */
-
-    .card-container{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:25px;
-    }
-
-    .card{
-      background:white;
-      padding:30px;
-      border-radius:15px;
-      box-shadow:0 4px 15px rgba(0,0,0,0.08);
-      transition:0.3s;
-    }
-
-    .card:hover{
-      transform:translateY(-5px);
-    }
-
-    .card h3{
-      color:#0077ff;
-      margin-bottom:15px;
-    }
-
-    /* JADWAL */
-
-    .jadwal ul{
-      width:300px;
-      margin:auto;
-      background:white;
-      padding:25px;
-      border-radius:15px;
-      box-shadow:0 4px 10px rgba(0,0,0,0.08);
-      list-style:none;
-    }
-
-    .jadwal li{
-      padding:10px;
-      border-bottom:1px solid #ddd;
-    }
-
-    /* TASK */
-
-    .task-list{
-      display:flex;
-      flex-direction:column;
-      gap:20px;
-      width:350px;
-      margin:auto;
-      background:white;
-      padding:30px;
-      border-radius:15px;
-      box-shadow:0 4px 10px rgba(0,0,0,0.08);
-    }
-
-    .task-list label{
-      font-size:18px;
-    }
-
-    .task-list input{
-      margin-right:10px;
-    }
-
-    #selesaiBtn{
-      display:block;
-      margin:30px auto;
-      padding:15px 30px;
-      border:none;
-      background:#0077ff;
-      color:white;
-      border-radius:10px;
-      cursor:pointer;
-      font-size:16px;
-    }
-
-    #selesaiBtn:hover{
-      background:#005fd1;
-    }
-
-    .point-text{
-      text-align:center;
-      font-size:25px;
-      font-weight:bold;
-    }
-
-    /* LEADERBOARD */
-
-    table{
-      width:70%;
-      margin:auto;
-      border-collapse:collapse;
-      background:white;
-      overflow:hidden;
-      border-radius:15px;
-      box-shadow:0 4px 10px rgba(0,0,0,0.08);
-    }
-
-    table th{
-      background:#0077ff;
-      color:white;
-      padding:15px;
-    }
-
-    table td{
-      padding:15px;
-      border-bottom:1px solid #ddd;
-      text-align:center;
-    }
-
-    /* REPORT */
-
-    form{
-      width:60%;
-      margin:auto;
-      display:flex;
-      flex-direction:column;
-      gap:20px;
-      background:white;
-      padding:30px;
-      border-radius:15px;
-      box-shadow:0 4px 10px rgba(0,0,0,0.08);
-    }
-
-    form input,
-    form textarea{
-      padding:15px;
-      border:1px solid #ccc;
-      border-radius:10px;
-      font-size:16px;
-    }
-
-    textarea{
-      height:120px;
-    }
-
-    form button{
-      padding:15px;
-      border:none;
-      background:#0077ff;
-      color:white;
-      border-radius:10px;
-      cursor:pointer;
-      font-size:16px;
-    }
-
-    form button:hover{
-      background:#005fd1;
-    }
-
-    /* FOOTER */
-
-    footer{
-      background:#0077ff;
-      color:white;
-      text-align:center;
-      padding:20px;
-      margin-top:50px;
-    }
-
-  </style>
+  <title>CleanClass — Smart Picket System</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
+  <div class="toast-container" id="toastContainer"></div>
+
   <!-- NAVBAR -->
-
   <header>
-
     <div class="logo">CleanClass</div>
-
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
     <nav>
-      <a href="#">Home</a>
-      <a href="#">Features</a>
-      <a href="#">Leaderboard</a>
-      <a href="#">Report</a>
+      <a href="#home">Home</a>
+      <a href="#features">Features</a>
+      <a href="#jadwal">Jadwal</a>
+      <a href="#checklist">Tugas</a>
+      <a href="#leaderboard">Ranking</a>
+      <a href="#exchange">Tukar Poin</a>
+      <a href="#report">Report</a>
+      <button id="themeToggle" aria-label="Toggle dark mode">🌙</button>
     </nav>
-
   </header>
 
   <!-- HERO -->
-
-  <section class="hero">
-
-    <div class="hero-text">
-
-      <h1>Smart Picket Management System</h1>
-
-      <p>
-        Sistem digital untuk membantu siswa menjalankan tugas piket
-        dengan lebih disiplin, transparan, dan menyenangkan.
-      </p>
-
-      <button>Mulai Sekarang</button>
-
+  <section class="hero" id="home">
+    <div class="hero-particles">
+      <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+      <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+      <div class="particle"></div><div class="particle"></div>
     </div>
-
-    <div class="hero-image">
-      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+    <div class="hero-text fade-in">
+      <div class="badge">🚀 Internal Orbit Competition 2026</div>
+      <h1>Smart Picket<br><span>Management System</span></h1>
+      <div class="hero-typing">✨ <span id="typingText"></span><span class="cursor">|</span></div>
+      <p>Sistem digital untuk membantu siswa menjalankan tugas piket dengan lebih disiplin, transparan, dan menyenangkan.</p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary" onclick="document.getElementById('checklist').scrollIntoView({behavior:'smooth'})">Mulai Sekarang</button>
+        <a href="#features" class="btn btn-secondary">Pelajari</a>
+      </div>
+      <div class="hero-stats-row">
+        <div class="hero-stat-item"><span class="num">150+</span><span class="label">Siswa Aktif</span></div>
+        <div class="hero-stat-item"><span class="num">1.2K</span><span class="label">Tugas Selesai</span></div>
+        <div class="hero-stat-item"><span class="num">98%</span><span class="label">Kepuasan</span></div>
+      </div>
     </div>
-
+    <div class="hero-image fade-in-right">
+      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Ilustrasi CleanClass" loading="lazy">
+    </div>
   </section>
 
   <!-- FEATURES -->
-
-  <section>
-
-    <h2>Fitur Utama</h2>
-
+  <section id="features">
+    <h2 class="fade-in">Fitur Unggulan</h2>
+    <p class="section-subtitle fade-in">Semua alat untuk mengelola kebersihan kelas secara modern.</p>
     <div class="card-container">
-
-      <div class="card">
+      <div class="card fade-in">
+        <div class="card-icon">📅</div>
         <h3>Smart Schedule</h3>
-        <p>Jadwal piket otomatis berdasarkan hari berjalan.</p>
+        <p>Jadwal piket otomatis berdasarkan hari. Tampilan mingguan biar semua kebagian tugas.</p>
+        <div class="card-tags"><span class="card-tag new">Baru</span></div>
       </div>
-
-      <div class="card">
+      <div class="card fade-in">
+        <div class="card-icon">✅</div>
         <h3>Checklist Tugas</h3>
-        <p>Checklist tugas piket harian siswa.</p>
+        <p>Daftar tugas harian dengan progress bar. Pantau siapa yang sudah selesai piket.</p>
+        <div class="card-tags"><span class="card-tag hot">Populer</span></div>
       </div>
-
-      <div class="card">
+      <div class="card fade-in">
+        <div class="card-icon">📸</div>
         <h3>Lapor Area Kotor</h3>
-        <p>Upload bukti foto kelas yang masih kotor.</p>
+        <p>Laporkan area kotor dengan bukti foto. Admin akan memverifikasi dan menindaklanjuti.</p>
+        <div class="card-tags"><span class="card-tag beta">Beta</span></div>
       </div>
-
-      <div class="card">
+      <div class="card fade-in">
+        <div class="card-icon">🏆</div>
         <h3>Leaderboard</h3>
-        <p>Sistem poin siswa paling rajin.</p>
+        <p>Sistem poin siswa paling rajin. Semakin tinggi poin, semakin besar rewardnya!</p>
+        <div class="card-tags"><span class="card-tag hot">Populer</span></div>
       </div>
-
-      <div class="card">
-        <h3>Whistleblowing</h3>
-        <p>Laporan anonim siswa yang tidak piket.</p>
+      <div class="card fade-in">
+        <div class="card-icon">🎁</div>
+        <h3>Tukar Poin</h3>
+        <p>Tukarkan poin piket kamu dengan berbagai reward menarik. Semakin rajin, semakin banyak hadiah!</p>
+        <div class="card-tags"><span class="card-tag new">Baru</span></div>
       </div>
-
-      <div class="card">
+      <div class="card fade-in">
+        <div class="card-icon">🛡️</div>
         <h3>Double Verification</h3>
-        <p>Verifikasi admin untuk mencegah sabotase.</p>
+        <p>Verifikasi admin untuk mencegah sabotase. Menjamin keadilan untuk semua siswa.</p>
+        <div class="card-tags"><span class="card-tag pro">Pro</span></div>
       </div>
-
     </div>
 
+    <div class="stats-container fade-in">
+      <div class="stat-item">
+        <div class="stat-number" data-target="6">0</div>
+        <div class="stat-label">Total Fitur</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="15">0</div>
+        <div class="stat-label">Siswa Terdaftar</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="totalTasks" data-target="4">0</div>
+        <div class="stat-label">Tugas Hari Ini</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="totalReports" data-target="0">0</div>
+        <div class="stat-label">Laporan Masuk</div>
+      </div>
+    </div>
   </section>
 
   <!-- JADWAL -->
-
-  <section class="jadwal">
-
-    <h2>Jadwal Piket Hari Ini</h2>
-
-    <ul id="daftar-piket"></ul>
-
+  <section id="jadwal">
+    <h2 class="fade-in">Jadwal Piket</h2>
+    <p class="section-subtitle fade-in">Jadwal piket harian dan mingguan. Lihat siapa saja yang bertugas.</p>
+    <div class="jadwal-grid fade-in">
+      <div class="jadwal-card">
+        <div class="hari-ini">Hari</div>
+        <div class="nama-hari" id="namaHari">—</div>
+        <ul id="daftar-piket"></ul>
+      </div>
+      <div class="jadwal-week">
+        <h3>📋 Jadwal Mingguan</h3>
+        <div class="week-grid" id="weekGrid"></div>
+      </div>
+    </div>
   </section>
 
-  <!-- TASK -->
+  <!-- CHECKLIST -->
+  <section id="checklist">
+    <h2 class="fade-in">Checklist Tugas</h2>
+    <p class="section-subtitle fade-in">Centang tugas yang sudah selesai, kumpulkan poin!</p>
+    <div class="task-wrapper fade-in">
+      <div class="progress-container">
+        <div class="progress-header">
+          <span>Progress Hari Ini</span>
+          <span id="progressText">0/4 selesai</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
 
-  <section>
+      <div class="task-list">
+        <div class="task-category">🧹 Kebersihan</div>
+        <div class="task-item">
+          <input type="checkbox" id="task1">
+          <label for="task1">Menyapu Kelas</label>
+        </div>
+        <div class="task-item">
+          <input type="checkbox" id="task2">
+          <label for="task2">Mengelap Meja & Kursi</label>
+        </div>
+        <div class="task-item">
+          <input type="checkbox" id="task3">
+          <label for="task3">Membuang Sampah</label>
+        </div>
 
-    <h2>Checklist Tugas</h2>
+        <div class="task-category">📚 Kerapihan</div>
+        <div class="task-item">
+          <input type="checkbox" id="task4">
+          <label for="task4">Merapikan Buku & Alat Tulis</label>
+        </div>
+        <div class="task-item">
+          <input type="checkbox" id="task5">
+          <label for="task5">Menata Meja dengan Rapi</label>
+        </div>
 
-    <div class="task-list">
+        <div class="task-category">🌿 Perawatan</div>
+        <div class="task-item">
+          <input type="checkbox" id="task6">
+          <label for="task6">Menyiram Tanaman</label>
+        </div>
+        <div class="task-item">
+          <input type="checkbox" id="task7">
+          <label for="task7">Membersihkan Jendela</label>
+        </div>
+        <div class="task-item">
+          <input type="checkbox" id="task8">
+          <label for="task8">Menyemprot Ruangan</label>
+        </div>
+      </div>
 
-      <label>
-        <input type="checkbox" class="checklist">
-        Menyapu Kelas
-      </label>
-
-      <label>
-        <input type="checkbox" class="checklist">
-        Menghapus Papan
-      </label>
-
-      <label>
-        <input type="checkbox" class="checklist">
-        Membuang Sampah
-      </label>
-
-      <label>
-        <input type="checkbox" class="checklist">
-        Menyiram Tanaman
-      </label>
-
+      <div class="task-actions">
+        <button id="selesaiBtn">Selesaikan Tugas</button>
+        <div class="point-display">
+          <span class="point-icon">⭐</span>
+          <span>Total Point:</span>
+          <span id="point">0</span>
+        </div>
+      </div>
     </div>
-
-    <button id="selesaiBtn">Selesaikan Tugas</button>
-
-    <div class="point-text">
-      Total Point : <span id="point">0</span>
-    </div>
-
   </section>
 
   <!-- LEADERBOARD -->
+  <section id="leaderboard">
+    <h2 class="fade-in">Leaderboard</h2>
+    <p class="section-subtitle fade-in">Siswa dengan poin piket terbanyak. Tambahkan dirimu ke papan peringkat!</p>
+    <div class="leaderboard-wrapper fade-in">
+      <div class="leaderboard-controls">
+        <input type="text" id="lbName" placeholder="Nama siswa..." maxlength="20">
+        <input type="number" id="lbPoints" placeholder="Poin" min="0">
+        <button id="lbAddBtn">Tambah / Update</button>
+        <button id="lbResetBtn" class="btn-reset">Reset</button>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Rank</th><th>Nama</th><th>Point</th></tr>
+        </thead>
+        <tbody id="leaderboardBody"></tbody>
+      </table>
+    </div>
+  </section>
 
-  <section>
-
-    <h2>Leaderboard Petugas Rajin</h2>
-
-    <table>
-
-      <tr>
-        <th>Rank</th>
-        <th>Nama</th>
-        <th>Point</th>
-      </tr>
-
-      <tr>
-        <td>1</td>
-        <td>Rizky</td>
-        <td>320</td>
-      </tr>
-
-      <tr>
-        <td>2</td>
-        <td>Alya</td>
-        <td>290</td>
-      </tr>
-
-      <tr>
-        <td>3</td>
-        <td>Fahri</td>
-        <td>260</td>
-      </tr>
-
-    </table>
-
+  <!-- EXCHANGE POINT -->
+  <section id="exchange">
+    <h2 class="fade-in">Tukar Poin</h2>
+    <p class="section-subtitle fade-in">Tukarkan poin piket kamu dengan reward menarik!</p>
+    <div class="exchange-wrapper">
+      <div class="exchange-header fade-in">
+        <div class="label">Poin Kamu</div>
+        <div class="current-points"><span id="exchangePoints">0</span> ⭐</div>
+      </div>
+      <div class="rewards-grid" id="rewardsGrid"></div>
+      <div class="redeem-history fade-in">
+        <h3>📜 Riwayat Penukaran</h3>
+        <div id="redeemHistory"></div>
+      </div>
+    </div>
   </section>
 
   <!-- REPORT -->
-
-  <section>
-
-    <h2>Laporan Area Kotor</h2>
-
-    <form id="reportForm">
-
-      <input type="text" placeholder="Nama Pelapor">
-
-      <textarea placeholder="Deskripsi Area Kotor"></textarea>
-
-      <input type="file">
-
-      <button type="submit">Kirim Laporan</button>
-
-    </form>
-
+  <section id="report">
+    <h2 class="fade-in">Laporan Area Kotor</h2>
+    <p class="section-subtitle fade-in">Laporkan area kelas yang masih kotor agar segera ditangani.</p>
+    <div class="report-layout fade-in">
+      <div class="report-wrapper">
+        <form id="reportForm">
+          <div class="form-group">
+            <label>Nama Pelapor</label>
+            <input type="text" id="reportName" placeholder="Masukkan nama kamu" required>
+          </div>
+          <div class="form-group">
+            <label>Area Kotor</label>
+            <select id="reportArea" required>
+              <option value="">Pilih area...</option>
+              <option value="Lantai">Lantai</option>
+              <option value="Papan Tulis">Papan Tulis</option>
+              <option value="Meja & Kursi">Meja & Kursi</option>
+              <option value="Jendela">Jendela</option>
+              <option value="Kamar Mandi">Kamar Mandi</option>
+              <option value="Lainnya">Lainnya</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Deskripsi</label>
+            <textarea id="reportDesc" placeholder="Jelaskan area yang kotor..." required></textarea>
+          </div>
+          <div class="form-group">
+            <label>Upload Bukti (opsional)</label>
+            <input type="file" id="reportFile">
+          </div>
+          <button type="submit">Kirim Laporan</button>
+        </form>
+      </div>
+      <div class="report-history">
+        <h3>📋 Riwayat Laporan</h3>
+        <div id="reportHistory"></div>
+      </div>
+    </div>
   </section>
 
   <!-- FOOTER -->
-
   <footer>
-    <p>© 2026 CleanClass - Internal Orbit Competition</p>
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#jadwal">Jadwal</a>
+        <a href="#leaderboard">Ranking</a>
+        <a href="#exchange">Tukar Poin</a>
+        <a href="#report">Report</a>
+      </div>
+      <div class="footer-bottom">© 2026 CleanClass — Internal Orbit Competition. Dibuat dengan ❤️</div>
+    </div>
   </footer>
 
-  <!-- JAVASCRIPT -->
-
-  <script>
-
-    /* SMART SCHEDULE */
-
-    const jadwalPiket = {
-
-      Senin: ["Rizky", "Alya", "Fahri"],
-      Selasa: ["Nabila", "Dimas", "Putri"],
-      Rabu: ["Bagas", "Sinta", "Raka"],
-      Kamis: ["Dion", "Citra", "Kevin"],
-      Jumat: ["Andi", "Lala", "Farhan"]
-
-    };
-
-    const hari = new Date().toLocaleDateString("id-ID", {
-      weekday: "long"
-    });
-
-    const daftarPiket = document.getElementById("daftar-piket");
-
-    if(jadwalPiket[hari]){
-
-      jadwalPiket[hari].forEach((nama) => {
-
-        const li = document.createElement("li");
-
-        li.textContent = nama;
-
-        daftarPiket.appendChild(li);
-
-      });
-
-    } else {
-
-      daftarPiket.innerHTML =
-      "<li>Tidak ada jadwal piket hari ini</li>";
-
-    }
-
-    /* CHECKLIST */
-
-    const checklist = document.querySelectorAll(".checklist");
-
-    checklist.forEach((item) => {
-
-      item.addEventListener("change", () => {
-
-        if(item.checked){
-
-          item.parentElement.style.textDecoration =
-          "line-through";
-
-          item.parentElement.style.color = "gray";
-
-        } else {
-
-          item.parentElement.style.textDecoration = "none";
-
-          item.parentElement.style.color = "black";
-
-        }
-
-      });
-
-    });
-
-    /* POINT SYSTEM */
-
-    let point = 0;
-
-    const selesaiBtn =
-    document.getElementById("selesaiBtn");
-
-    const pointText =
-    document.getElementById("point");
-
-    selesaiBtn.addEventListener("click", () => {
-
-      point += 10;
-
-      pointText.innerText = point;
-
-      alert("Tugas selesai! +10 Point");
-
-    });
-
-    /* REPORT */
-
-    const form =
-    document.getElementById("reportForm");
-
-    form.addEventListener("submit", (e) => {
-
-      e.preventDefault();
-
-      alert("Laporan berhasil dikirim!");
-
-      form.reset();
-
-    });
-
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
